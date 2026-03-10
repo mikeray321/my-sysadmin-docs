@@ -3,10 +3,10 @@
 *Tamdiu discendum est, quoad vivas, quemadmodum vivas*.
 - Seneca
 
-[//] **Purpose**:
+[//]**Purpose**:
 
-[//] **Requirements**: 
+[//]**Requirements**: 
 
-[//] **Usage**: 
+[//]**Usage**: 
 
-[//] **Security Note**: 
+[//]**Security Note**: 
