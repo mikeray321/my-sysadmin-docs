@@ -1,7 +1,7 @@
 # my-sysadmin-docs
 my-sysadmin-docs
 
-Purpose:
+*Purpose*:
 This repo solves the problem of knowledge sharing. 
 
 Requirements: n/a
