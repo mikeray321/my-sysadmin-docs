@@ -3,12 +3,9 @@
 *Tamdiu discendum est, quoad vivas, quemadmodum vivas*.
 -Seneca
 
----
-
+---mermaid
 ### A "Bulletproof" Test
 Please try copying this extremely simple version to see if *any* diagram renders. If this works, we can add the complexity back in:
-
-```mermaid
 graph TB
     subgraph "Your Laptop (e.g., Mac/Windows/Linux)"
         subgraph "A k3d or kind 'Node' (Docker Container 1)"
