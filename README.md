@@ -11,6 +11,7 @@ Please try copying this extremely simple version to see if *any* diagram renders
 ```mermaid
 graph TD
     Start --> GitHub --> Success
+```
 
 ```mermaid
 graph TB
