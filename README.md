@@ -4,34 +4,27 @@
 -Seneca
 
 ```mermaid
-graph TB
-  subgraph "Control Plane"
-    API[kube-apiserver]
-    ETCD[(etcd)]
-    SCH[kube-scheduler]
-    CM[kube-controller-manager]
-    
-    API --- ETCD
-    API --- SCH
-    API --- CM
-  end
+flowchart TD
+    %% Styling based on K8s docs guidelines
+    classDef k8s fill:#326ce5,stroke:#fff,stroke-width:2px,color:#fff;
+    classDef storage fill:#f96,stroke:#333,stroke-width:2px;
 
-  subgraph "Node 1 (Worker)"
-    K1[kubelet]
-    P1[kube-proxy]
-    D1[Container Runtime]
+    User((User)) --> LB[External Load Balancer]
     
-    K1 --- D1
-  end
-
-  subgraph "Node 2 (Worker)"
-    K2[kubelet]
-    P2[kube-proxy]
-    D2[Container Runtime]
-    
-    K2 --- D2
-  end
-
-  API === K1
-  API === K2
+    subgraph CP [Control Plane - HA]
+        direction TB
+        LB --> API1[kube-apiserver 1]
+        LB --> API2[kube-apiserver 2]
+        LB --> API3[kube-apiserver 3]
+        
+        API1 <--> ETCD[(etcd cluster)]
+        API2 <--> ETCD
+        API3 <--> ETCD
     end
+
+    API1 --> W1[Worker Node 1]
+    API2 --> W2[Worker Node 2]
+    API3 --> W3[Worker Node 3]
+
+    class API1,API2,API3,W1,W2,W3 k8s;
+    class ETCD storage;
