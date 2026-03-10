@@ -3,6 +3,8 @@
 *Tamdiu discendum est, quoad vivas, quemadmodum vivas*.
 -Seneca
 
+### HA
+
 ```mermaid
 flowchart TD
     %% Styling based on K8s docs guidelines
@@ -28,3 +30,34 @@ flowchart TD
 
     class API1,API2,API3,W1,W2,W3 k8s;
     class ETCD storage;
+
+### Edge Computing Architecture (k3s Style)
+
+```mermad
+flowchart LR
+    classDef hub fill:#326ce5,stroke:#fff,color:#fff;
+    classDef edge fill:#666,stroke:#fff,color:#fff;
+
+    subgraph Central [Cloud / Central Hub]
+        direction TB
+        Admin[Cluster Admin] --> GitOps[GitOps Controller]
+        GitOps --> Registry[Image Registry]
+    end
+
+    subgraph SiteA [Edge Site: Factory]
+        direction TB
+        k3s_A[k3s Cluster] --> Sensor[IoT Sensor Pod]
+    end
+
+    subgraph SiteB [Edge Site: Retail]
+        direction TB
+        k3s_B[k3s Cluster] --> POS[Point of Sale Pod]
+    end
+
+    GitOps -- "Deploy Policy" --> k3s_A
+    GitOps -- "Deploy Policy" --> k3s_B
+    Registry -- "Pull Image" --> k3s_A
+    Registry -- "Pull Image" --> k3s_B
+
+    class Admin,GitOps,Registry hub;
+    class k3s_A,k3s_B edge;
